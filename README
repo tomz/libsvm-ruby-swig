@@ -5,6 +5,9 @@ A modified version of LIBSVM is included, it contains changes merged from:
 to expose additional data/parameters in the model object. 
 
 Look for the README file in the ruby subdirectory for instructions
+The binaries included were built under Ubuntu Linux 2.6.24-23-generic,
+you should run make under the libsvm-2.88 and libsvm-2.88/ruby 
+directories to regenarate the excutables for your environment.
 
 Tom Zeng
 http://www.tomzconsulting.com

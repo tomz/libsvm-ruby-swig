@@ -33,13 +33,14 @@ the generated files with
 before building the module. Note that SWIG version >= 1.3.8 should be used.
 
 When the build process completes, a shared object called svmc.so will be
-created.  And you should be able to run the Ruby test code.
+created.  And you should be able to run the Ruby test and example code in
+the ruby directory.
 
-To install this module into the system's Ruby installation, you will need be
-a system administrator privilege and copy svmc.so and svm.rb to the Ruby 
-library directory(yours might be different):
+To install this module into the system's Ruby installation, you will need to
+have the system administrator privilege and copy svmc.so and svm.rb to the
+Ruby library directory(yours might be different):
 
-    sudo cp svmc.so /usr/local/lib/site_ruby/1.8/i486-linux
+  sudo cp svmc.so /usr/local/lib/site_ruby/1.8/i486-linux
 	sudo cp svm.rb /usr/local/lib/site_ruby/1.8
 
 
@@ -149,8 +150,11 @@ subroutine.
 
 
 Two more examples are adopted:
-test.rb      - from http://rubysvm.cilibrar.com - maker of libsvm-ruby, a direct Ruby to C++ interface, partial exposure of LIBSVM functions
-test_spam.rb - from http://www.igvita.com/2008/01/07/support-vector-machines-svm-in-ruby, excellent tutorials by an U of Waterloo alumni
+  test.rb      - from http://rubysvm.cilibrar.com - maker of libsvm-ruby,
+                 a direct Ruby to C++ interface, partial exposure of
+                 LIBSVM functions
+  test_spam.rb - from http://www.igvita.com/2008/01/07/support-vector-machines-svm-in-ruby, 
+                 excellent tutorials by an U of Waterloo alumni
 
 
 Tom Zeng 
