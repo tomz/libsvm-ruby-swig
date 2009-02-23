@@ -312,7 +312,7 @@ class Model
   def get_svr_pdf
     #get_svr_probability will handle error checking
     sigma = get_svr_probability()
-    return Proc.new{|z| exp(-z.abs/sigma)/(2*sigma)}  # TODO: verify this work
+    return Proc.new{|z| exp(-z.abs/sigma)/(2*sigma)}  # TODO: verify this works
   end
   
   def save(filename)
