@@ -1,2 +1,14 @@
 This is the Ruby port of the LIBSVM Python SWIG interface
+A modified version of LIBSVM is included, it contains changes merged from:
+  git://github.com/npinto/libsvm-2.88_objs-np.git
+  git://github.com/alanfalloon/libsvm-2.88_output_model_params.git
+to expose additional in the model object. 
+
+Look for the README in the ruby subdirectory for instructions
+
+Tom Zeng
+http://www.tomzconsulting.com
+http://www.linkedin.com/in/tomzeng
+tom.z.zeng _at_ gmail _dot_ com
+
 
