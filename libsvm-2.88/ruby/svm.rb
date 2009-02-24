@@ -210,11 +210,11 @@ class Model
     delete_int(intarr)
     #check if valid probability model
     @probability = svm_check_probability_model(@model)
-    
+
     @objs = []
     for i in (0..@labels.size-1)
       @objs << svm_get_obj(@model, i)
-    end
+    end if arg2 != nil
     
   end
   
