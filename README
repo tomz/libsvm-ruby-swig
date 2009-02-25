@@ -1,16 +1,20 @@
-This is the Ruby port of the LIBSVM Python SWIG interface
-A modified version of LIBSVM is included, it contains changes merged from:
+This is the Ruby port of the LIBSVM Python SWIG (Simplified Wrapper and 
+Interface Generator) interface.
+
+A modified version of LIBSVM 2.88 is included, it contains changes merged from:
   git://github.com/npinto/libsvm-2.88_objs-np.git
   git://github.com/alanfalloon/libsvm-2.88_output_model_params.git
-to expose additional data/parameters in the model object. 
+to expose additional data/parameters in the model object. You don't need your
+own copy of SWIG to use this library - all needed files are generated using
+SWIG already.
 
-Look for the README file in the ruby subdirectory for instructions
+Look for the README file in the ruby subdirectory for instructions.
 The binaries included were built under Ubuntu Linux 2.6.24-23-generic,
 you should run make under the libsvm-2.88 and libsvm-2.88/ruby 
-directories to regenerate the excutables for your environment.
+directories to regenerate the executables for your environment.
 
-Quick Interactive Tutorial using irb(adopted from Toby Segaran's "Programming
-Collective Intelligence" book):
+Quick Interactive Tutorial using irb (adopted from the python code from Toby
+Segaran's "Programming Collective Intelligence" book):
 
   irb(main):001:0> require 'svm'
   => true
