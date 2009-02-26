@@ -11,27 +11,28 @@ size = samples.size
 kernels = [LINEAR, POLY, RBF, SIGMOID]
 kname = {LINEAR=>'linear',POLY=>'polynomial',RBF=>'rbf',SIGMOID=>'sigmoid'}
 
-param = Parameter.new('C' => 10,'nr_weight' => 2,'weight_label' => [1,0],'weight' => [10,1])
+param = Parameter.new(:C => 10, :nr_weight => 2, :weight_label => [1,0], :weight => [10,1])
+# or:
 #param = Parameter.new
 #param.C = 10
 #param.nr_weight = 2
 #param.weight_label = [1,0]
 #param.weight = [10,1]
 for k in kernels
-	param.kernel_type = k
-	model = Model.new(problem,param)
-#    model.save(kname[k]+".model")
-	errors = 0
-	for i in (0..size-1)
-		prediction = model.predict(samples[i])
-		probability = model.predict_probability(samples[i])
-		if (labels[i] != prediction)
-			errors = errors + 1
-        end
+  param.kernel_type = k
+  model = Model.new(problem,param)
+  #model.save(kname[k]+".model")
+  errors = 0
+  for i in (0..size-1)
+    prediction = model.predict(samples[i])
+    probability = model.predict_probability(samples[i])
+    if (labels[i] != prediction)
+      errors = errors + 1
     end
-	puts "##########################################"
-	puts " kernel #{kname[k]}: error rate = #{errors} / #{size}"
-	puts "##########################################"
+  end
+  puts "##########################################"
+  puts " kernel #{kname[k]}: error rate = #{errors} / #{size}"
+  puts "##########################################"
 end
 
 param = Parameter.new('kernel_type' => RBF, 'C'=>10)
@@ -48,11 +49,11 @@ puts "Numer of Classes:" + model.get_nr_class().to_s
 d = model.predict_values(samples[0])
 #puts d.inspect
 for i in model.get_labels
-	for j in model.get_labels
-		if j>i
-			puts "{#{i}, #{j}} = #{d[i][j]}"
-        end
+  for j in model.get_labels
+    if j>i
+      puts "{#{i}, #{j}} = #{d[i][j]}"
     end
+  end
 end
 
 param = Parameter.new('kernel_type' => RBF, 'C'=>10, 'probability' => 1)
@@ -68,7 +69,7 @@ puts " Probability estimate of predicting #{samples[1].inspect}"
 puts "##########################################"
 puts "predicted class: #{pred_label}"
 for i in model.get_labels
-	puts "prob(label=#{i}) = #{pred_probability[i]}"
+  puts "prob(label=#{i}) = #{pred_probability[i]}"
 end
 
 puts "##########################################"

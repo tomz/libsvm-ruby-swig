@@ -11,11 +11,11 @@ f.each do |line|
   elems = line.split
   sample = {}
   for e in elems[1..-1]
-     points = e.split(":")
-     sample[points[0].to_i] = points[1].to_f
-     if points[0].to_i < max_index
-        max_index = points[0].to_i
-     end
+    points = e.split(":")
+    sample[points[0].to_i] = points[1].to_f
+    if points[0].to_i < max_index
+      max_index = points[0].to_i
+    end
   end
   labels << elems[0].to_f
   samples << sample
