@@ -65,7 +65,7 @@ include C_SVC, NU_SVC, ONE_CLASS, EPSILON_SVR, and NU_SVR. Available
 kernel types include LINEAR, POLY, RBF, and SIGMOID. The user can
 setup the parameters with the constructor and keyword arguments:
 
-	param = Parameter.new(kernel_type => LINEAR, C => 10)
+	param = Parameter.new(:kernel_type => LINEAR, :C => 10)
 
 The user can also modify the parameters later:
 
