@@ -65,7 +65,7 @@ include C_SVC, NU_SVC, ONE_CLASS, EPSILON_SVR, and NU_SVR. Available
 kernel types include LINEAR, POLY, RBF, and SIGMOID. The user can
 setup the parameters with the constructor and keyword arguments:
 
-	param = Parameter(kernel_type = LINEAR, C = 10)
+	param = Parameter.new(kernel_type => LINEAR, C => 10)
 
 The user can also modify the parameters later:
 
@@ -75,24 +75,24 @@ svm_problem is used to hold the training data for the problem. The
 constructor takes two arguments; the first of them is the list of labels,
 and the other is the list of samples. For example
 
-	prob = Problem([1,-1],[[1,0,1],[-1,0,-1]])
+	prob = Problem.new([1,-1],[[1,0,1],[-1,0,-1]])
 
 or equivalently
 
-	prob = Problem([1,-1],[{1:1,3:1},{1:-1,3:-1}])
+	prob = Problem.new([1,-1],[{1=>1,3=>1},{1=>-1,3=>-1}])
 
 For precomputed kernels, the first element of each instance must be
 the ID. For example,
 
 	samples = [[1, 0, 0, 0, 0], [2, 0, 1, 0, 1], [3, 0, 0, 1, 1], [4, 0, 1, 1, 2]]
-	problem = Problem(labels, samples);
+	problem = Problem.new(labels, samples);
 
 For more details of precomputed kernels, please check README of the
 parent directory.
 
 Once the parameter and problem are ready, we can construct the model:
 
-	m = Model(prob, param)
+	m = Model.new(prob, param)
 
 To conduct n-fold cross validation; predicted labels in the validation
 process are returned.
@@ -131,7 +131,7 @@ To save the model to a file:
 
 and to load the model from a file:
 
-	m = Model('test.model')
+	m = Model.new('test.model')
 
 Examples
 ========
