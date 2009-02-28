@@ -35,16 +35,19 @@ inline double powi(double base, int times)
 #define TAU 1e-12
 #define Malloc(type,n) (type *)malloc((n)*sizeof(type))
 #if 1
+int info_on = 0;
 static void info(const char *fmt,...)
 {
 	va_list ap;
-	va_start(ap,fmt);
-	vprintf(fmt,ap);
-	va_end(ap);
+  if (info_on==1) {
+  	va_start(ap,fmt);
+	  vprintf(fmt,ap);
+  	va_end(ap);
+  }
 }
 static void info_flush()
 {
-	fflush(stdout);
+	if (info_on==1) fflush(stdout);
 }
 #else
 static void info(char *fmt,...) {}
