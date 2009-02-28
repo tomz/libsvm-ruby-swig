@@ -2092,6 +2092,7 @@ SWIG_AsVal_size_t (VALUE obj, size_t *val)
   }
 
 
+extern int info_on;
 struct svm_node *svm_node_array(int size)
 {
 	return (struct svm_node *)malloc(sizeof(struct svm_node)*size);
@@ -3949,6 +3950,31 @@ fail:
 
 
 SWIGINTERN VALUE
+_wrap_info_on_get(VALUE self) {
+  VALUE _val;
+  
+  _val = SWIG_From_int(static_cast< int >(info_on));
+  return _val;
+}
+
+
+SWIGINTERN VALUE
+_wrap_info_on_set(VALUE self, VALUE _val) {
+  {
+    int val;
+    int res = SWIG_AsVal_int(_val, &val);
+    if (!SWIG_IsOK(res)) {
+      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""info_on""' of type '""int""'");
+    }
+    info_on = static_cast< int >(val);
+  }
+  return _val;
+fail:
+  return Qnil;
+}
+
+
+SWIGINTERN VALUE
 _wrap_svm_node_array(int argc, VALUE *argv, VALUE self) {
   int arg1 ;
   int val1 ;
@@ -4510,6 +4536,8 @@ SWIGEXPORT void Init_svmc(void) {
   rb_define_module_function(mSvmc, "delete_double", VALUEFUNC(_wrap_delete_double), -1);
   rb_define_module_function(mSvmc, "double_getitem", VALUEFUNC(_wrap_double_getitem), -1);
   rb_define_module_function(mSvmc, "double_setitem", VALUEFUNC(_wrap_double_setitem), -1);
+  rb_define_singleton_method(mSvmc, "info_on", VALUEFUNC(_wrap_info_on_get), 0);
+  rb_define_singleton_method(mSvmc, "info_on=", VALUEFUNC(_wrap_info_on_set), 1);
   rb_define_module_function(mSvmc, "svm_node_array", VALUEFUNC(_wrap_svm_node_array), -1);
   rb_define_module_function(mSvmc, "svm_node_array_set", VALUEFUNC(_wrap_svm_node_array_set), -1);
   rb_define_module_function(mSvmc, "svm_node_array_destroy", VALUEFUNC(_wrap_svm_node_array_destroy), -1);

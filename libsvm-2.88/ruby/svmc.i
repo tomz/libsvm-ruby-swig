@@ -70,6 +70,7 @@ void svm_get_model_perm(struct svm_model *model, int* out_array);
 
 
 %inline %{
+extern int info_on;
 struct svm_node *svm_node_array(int size)
 {
 	return (struct svm_node *)malloc(sizeof(struct svm_node)*size);
