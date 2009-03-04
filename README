@@ -13,6 +13,10 @@ The binaries included were built under Ubuntu Linux 2.6.24-23-generic,
 you should run make under the libsvm-2.88 and libsvm-2.88/ruby 
 directories to regenerate the executables for your environment.
 
+Install as a gem (thanks to FeedbackMine <feedbackmine@feedbackmine.com>):
+  sudo gem sources -a http://gems.github.com   (you only have to do this once)
+  sudo gem install tomz-libsvm-ruby-swig
+
 Quick Interactive Tutorial using irb (adopted from the python code from Toby
 Segaran's "Programming Collective Intelligence" book):
 

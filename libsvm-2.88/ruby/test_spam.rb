@@ -52,7 +52,7 @@ puts "First test vector: #{test_vectors.first.inspect}\n"
 # Define kernel parameters -- we'll stick with the defaults
 pa = Parameter.new
 pa.C = 100
-pa.svm_type = NU_SVC
+#pa.svm_type = NU_SVC
 pa.degree = 1
 pa.coef0 = 0
 pa.eps= 0.001

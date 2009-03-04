@@ -1,0 +1,11 @@
+History.txt
+COPYING
+AUTHORS
+Manifest.txt
+README.txt
+Rakefile
+lib/svm.rb
+ext/svmc_wrap.cxx
+ext/svm.cpp
+ext/svm.h
+ext/extconf.rb
