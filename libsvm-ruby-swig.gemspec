@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.date = %q{2009-03-04}
   s.description = %q{Ruby wrapper of LIBSVM using SWIG}
   s.email = %q{tom.z.zeng@gmail.com}
-  s.extensions = ["extconf.rb"]
+  s.extensions = ["ext/extconf.rb"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
   s.files = ["History.txt", "COPYING", "AUTHORS", "Manifest.txt", "README.txt", "Rakefile", "lib/svm.rb", "ext/svmc_wrap.cxx", "ext/svm.cpp", "ext/svm.h", "ext/extconf.rb"]
   s.has_rdoc = true
