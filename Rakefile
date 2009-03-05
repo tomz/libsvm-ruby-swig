@@ -1,11 +1,11 @@
 require 'rubygems'
 require 'hoe'
 
-task :default => ["make_gem"] 
+task :default => ["sync_files","make_gem"] 
 
-EXT = "ext/blah.#{Hoe::DLEXT}"
+EXT = "ext/svm?.#{Hoe::DLEXT}"
 
-Hoe.new('libsvm-ruby-swig', '0.2.2') do |p|
+Hoe.new('libsvm-ruby-swig', '0.2.3') do |p|
   p.author = 'Tom Zeng'
   p.email = 'tom.z.zeng@gmail.com'
   p.url = 'http://www.tomzconsulting.com'
@@ -25,9 +25,13 @@ file EXT => ["ext/extconf.rb", "ext/svmc_wrap.cxx", "ext/svm.cpp", "ext/svm.h"] 
   end
 end
 
-task :copy_files do
+task :sync_files do
   cp "libsvm-2.88/svm.h","ext/"
   cp "libsvm-2.88/svm.cpp","ext/"
   cp "libsvm-2.88/ruby/svmc_wrap.cxx","ext/"
   cp "libsvm-2.88/ruby/svm.rb","lib/"
+end
+
+task :test do
+  puts "done"
 end
