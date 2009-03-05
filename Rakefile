@@ -5,7 +5,7 @@ task :default => ["make_gem"]
 
 EXT = "ext/blah.#{Hoe::DLEXT}"
 
-Hoe.new('libsvm-ruby-swig', '0.2.1') do |p|
+Hoe.new('libsvm-ruby-swig', '0.2.2') do |p|
   p.author = 'Tom Zeng'
   p.email = 'tom.z.zeng@gmail.com'
   p.url = 'http://www.tomzconsulting.com'
