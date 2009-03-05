@@ -103,7 +103,7 @@ class Parameter
 end
 
 def _convert_to_svm_node_array(x)
-  # convert a sequence or mapping to an svm_node array
+  # convert a hash or array to an svm_node array
   
   # Find non zero elements
   iter_range = []
@@ -117,7 +117,7 @@ def _convert_to_svm_node_array(x)
       iter_range << j #if x[j] != 0
     }
   else
-    raise TypeError,"data must be a mapping or a sequence"
+    raise TypeError,"data must be a hash or an array"
   end
   
   iter_range.sort
@@ -167,7 +167,7 @@ class Problem
   end
   
   def inspect
-    return "svm_problem: size = #{size}"
+    return "Problem: size = #{size}"
   end
   
   def destroy
@@ -270,7 +270,7 @@ class Model
           count += 1
         end
       end
-      return  d
+      return d
     end
   end
   
