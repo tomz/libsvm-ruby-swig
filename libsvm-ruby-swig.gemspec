@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{libsvm-ruby-swig}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Zeng","FeedbackMine"]
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.homepage = %q{http://www.tomzconsulting.com}
   s.rdoc_options = ["--main", "README.txt"]
-  s.require_paths = ["ext"]
+  s.require_paths = ["lib","ext"]
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{Ruby wrapper of LIBSVM using SWIG}
 
