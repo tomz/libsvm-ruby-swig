@@ -1,4 +1,3 @@
-
 Gem::Specification.new do |s|
   s.name = %q{libsvm-ruby-swig}
   s.version = "0.2.0"
