@@ -2,6 +2,8 @@
 
 require 'cross_validation'
 
+Svmc::info_on = 1
+
 labels = []
 samples = []
 max_index = 0
