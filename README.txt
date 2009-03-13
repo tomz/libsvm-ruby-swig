@@ -21,6 +21,8 @@ you should run make under the libsvm-2.88 and libsvm-2.88/ruby
 directories to regenerate the executables for your environment.
 
 == INSTALL:
+Currently the gem is available on linux only(tested on Ubuntu 8 and Fedora 9),
+and you will need g++ installed to compile the native code. 
 
   sudo gem sources -a http://gems.github.com   (you only have to do this once)
   sudo gem install tomz-libsvm-ruby-swig
