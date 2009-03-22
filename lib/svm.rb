@@ -1,5 +1,5 @@
-require 'svmc'
-include Svmc
+require 'libsvm-ruby-swig/libsvm'
+include LibSVM
 
 def _int_array(seq)
   size = seq.size
@@ -196,7 +196,7 @@ class Model
         param.gamma = 1.0/prob.maxlen
       end
       msg = svm_check_parameter(prob.prob,param.param)
-      raise "ValueError", msg if msg
+      raise ::ArgumentError, msg if msg
       @model = svm_train(prob.prob,param.param)
     end
     

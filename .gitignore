@@ -1,0 +1,4 @@
+ext/*.bundle
+ext/*.so
+ext/*.o
+ext/Makefile
