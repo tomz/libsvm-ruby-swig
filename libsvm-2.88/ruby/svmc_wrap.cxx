@@ -4435,11 +4435,11 @@ SWIG_PropagateClientData(void) {
 #ifdef __cplusplus
 extern "C"
 #endif
-SWIGEXPORT void Init_svmc(void) {
+SWIGEXPORT void Init_libsvm(void) {
   size_t i;
   
   SWIG_InitRuntime();
-  mSvmc = rb_define_module("Svmc");
+  mSvmc = rb_define_module("LibSVM");
   
   SWIG_InitializeModule(0);
   for (i = 0; i < swig_module.size; i++) {

@@ -2,7 +2,7 @@
 
 require 'cross_validation'
 
-Svmc::info_on = 1
+LibSVM::info_on = 1
 
 labels = []
 samples = []

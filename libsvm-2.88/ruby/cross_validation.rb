@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'rubygems'
 require 'svm'
 
 def do_cross_validation(prob_x, prob_y, param, nr_fold)

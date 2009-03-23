@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-
+require 'rubygems'
 require 'svm'
 
-Svmc::info_on = 1 # turn on the built-in loggin, default to 0 (off)
+LibSVM::info_on = 1 # turn on the built-in loggin, default to 0 (off)
 # a three-class problem
 labels = [0, 1, 1, 2]
 samples = [[0, 0], [0, 1], [1, 0], [1, 1]]
