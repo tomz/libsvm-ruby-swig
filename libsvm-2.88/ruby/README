@@ -132,10 +132,10 @@ and to load the model from a file:
 
 	m = Model.new('test.model')
 
-By default the built-in logging is turned off(Svmc::info_on = 0), you can
+By default the built-in logging is turned off(LibSVM::info_on = 0), you can
 turn it on with:
 
-  Svmc::info_on = 1
+  LibSVM::info_on = 1
 
 
 Examples
