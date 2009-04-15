@@ -120,7 +120,7 @@ def _convert_to_svm_node_array(x)
     raise TypeError,"data must be a hash or an array"
   end
   
-  iter_range.sort
+  iter_range.sort!
   data = svm_node_array(iter_range.size+1)
   svm_node_array_set(data,iter_range.size,-1,0)
   
