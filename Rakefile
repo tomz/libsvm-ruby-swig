@@ -5,7 +5,7 @@ task :default => ["sync_files","make_gem"]
 
 EXT = "ext/svm?.#{Hoe::DLEXT}"
 
-Hoe.new('libsvm-ruby-swig', '0.2.4') do |p|
+Hoe.new('libsvm-ruby-swig', '0.2.5') do |p|
   p.author = 'Tom Zeng'
   p.email = 'tom.z.zeng@gmail.com'
   p.url = 'http://www.tomzconsulting.com'
