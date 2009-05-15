@@ -181,7 +181,7 @@ class Problem
 end
 
 class Model
-  attr_accessor :model,:objs
+  attr_accessor :model
   
   def initialize(arg1,arg2=nil)
     if arg2 == nil
@@ -211,11 +211,6 @@ class Model
     #check if valid probability model
     @probability = svm_check_probability_model(@model)
 
-    @objs = []
-    for i in (0..@labels.size-1)
-      @objs << svm_get_obj(@model, i)
-    end if arg2 != nil
-    
   end
   
   def predict(x)
