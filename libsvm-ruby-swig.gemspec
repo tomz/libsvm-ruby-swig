@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{libsvm-ruby-swig}
-  s.version = "0.2.5"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Zeng","FeedbackMine"]
-  s.date = %q{2009-03-04}
+  s.date = %q{2009-05-14}
   s.description = %q{Ruby wrapper of LIBSVM using SWIG}
   s.email = %q{tom.z.zeng@gmail.com}
   s.extensions = ["ext/extconf.rb"]
