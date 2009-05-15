@@ -43,14 +43,17 @@ static void print_string_stdout(const char *s)
 }
 void (*svm_print_string) (const char *) = &print_string_stdout;
 #if 1
+int info_on = 0;
 static void info(const char *fmt,...)
 {
 	char buf[BUFSIZ];
 	va_list ap;
+  if (info_on==1) {
 	va_start(ap,fmt);
 	vsprintf(buf,fmt,ap);
 	va_end(ap);
 	(*svm_print_string)(buf);
+  }
 }
 #else
 static void info(const char *fmt,...) {}
