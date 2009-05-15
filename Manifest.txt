@@ -2,7 +2,7 @@ History.txt
 COPYING
 AUTHORS
 Manifest.txt
-README.txt
+README.rdoc
 Rakefile
 lib/svm.rb
 ext/libsvm_wrap.cxx
