@@ -1,3 +1,4 @@
 2009-03-04  Tom Zeng (tom.z.zeng@gmail.com)
   * adopted the gem spec by feedbackmine.com
-
+2009-05-14  Tom Zeng
+  * upgrade LIBSVM to 2.89
