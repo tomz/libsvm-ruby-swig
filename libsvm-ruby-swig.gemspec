@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.extensions = ["ext/extconf.rb"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.rdoc"]
   s.files = ["History.txt", "COPYING", "AUTHORS", "Manifest.txt", "README.rdoc", "Rakefile", "lib/svm.rb", "ext/libsvm_wrap.cxx", "ext/svm.cpp", "ext/svm.h", "ext/extconf.rb"]
-#  s.has_rdoc = true
+  s.has_rdoc = false
   s.homepage = %q{http://www.tomzconsulting.com}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib","ext"]
