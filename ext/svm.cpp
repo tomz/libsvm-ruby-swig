@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include "svm.h"
+int libsvm_version = LIBSVM_VERSION;
 typedef float Qfloat;
 typedef signed char schar;
 #ifndef min
@@ -22,36 +23,40 @@ template <class S, class T> inline void clone(T*& dst, S* src, int n)
 }
 inline double powi(double base, int times)
 {
-        double tmp = base, ret = 1.0;
+	double tmp = base, ret = 1.0;
 
-        for(int t=times; t>0; t/=2)
+	for(int t=times; t>0; t/=2)
 	{
-                if(t%2==1) ret*=tmp;
-                tmp = tmp * tmp;
-        }
-        return ret;
+		if(t%2==1) ret*=tmp;
+		tmp = tmp * tmp;
+	}
+	return ret;
 }
 #define INF HUGE_VAL
 #define TAU 1e-12
 #define Malloc(type,n) (type *)malloc((n)*sizeof(type))
+
+static void print_string_stdout(const char *s)
+{
+	fputs(s,stdout);
+	fflush(stdout);
+}
+void (*svm_print_string) (const char *) = &print_string_stdout;
 #if 1
 int info_on = 0;
 static void info(const char *fmt,...)
 {
+	char buf[BUFSIZ];
 	va_list ap;
   if (info_on==1) {
-  	va_start(ap,fmt);
-	  vprintf(fmt,ap);
-  	va_end(ap);
+	va_start(ap,fmt);
+	vsprintf(buf,fmt,ap);
+	va_end(ap);
+	(*svm_print_string)(buf);
   }
 }
-static void info_flush()
-{
-	if (info_on==1) fflush(stdout);
-}
 #else
-static void info(char *fmt,...) {}
-static void info_flush() {}
+static void info(const char *fmt,...) {}
 #endif
 
 //
@@ -564,7 +569,7 @@ void Solver::Solve(int l, const QMatrix& Q, const double *p_, const schar *y_,
 		{
 			counter = min(l,1000);
 			if(shrinking) do_shrinking();
-			info("."); info_flush();
+			info(".");
 		}
 
 		int i,j;
@@ -574,7 +579,7 @@ void Solver::Solve(int l, const QMatrix& Q, const double *p_, const schar *y_,
 			reconstruct_gradient();
 			// reset active set size and check
 			active_size = l;
-			info("*"); info_flush();
+			info("*");
 			if(select_working_set(i,j)!=0)
 				break;
 			else
@@ -927,7 +932,7 @@ void Solver::do_shrinking()
 		unshrink = true;
 		reconstruct_gradient();
 		active_size = l;
-		info("*"); info_flush();
+		info("*");
 	}
 
 	for(i=0;i<active_size;i++)
@@ -1110,7 +1115,7 @@ int Solver_NU::select_working_set(int &out_i, int &out_j)
 	}
 
 	if(max(Gmaxp+Gmaxp2,Gmaxn+Gmaxn2) < eps)
- 		return 1;
+		return 1;
 
 	if (y[Gmin_idx] == +1)
 		out_i = Gmaxp_idx;
@@ -1388,7 +1393,7 @@ public:
 		Qfloat *buf = buffer[next_buffer];
 		next_buffer = 1 - next_buffer;
 		schar si = sign[i];
-		for(int j=0;j<len;j++)
+		for(j=0;j<len;j++)
 			buf[j] = (Qfloat) si * (Qfloat) sign[j] * data[index[j]];
 		return buf;
 	}
@@ -1625,7 +1630,6 @@ struct decision_function
 {
 	double *alpha;
 	double rho;	
-    double obj;
 };
 
 decision_function svm_train_one(
@@ -1682,7 +1686,6 @@ decision_function svm_train_one(
 	decision_function f;
 	f.alpha = alpha;
 	f.rho = si.rho;
-	f.obj = si.obj;
 	return f;
 }
 
@@ -1697,10 +1700,8 @@ struct svm_model
 	svm_node **SV;		// SVs (SV[l])
 	double **sv_coef;	// coefficients for SVs in decision functions (sv_coef[k-1][l])
 	double *rho;		// constants in decision functions (rho[k*(k-1)/2])
-	double *probA;          // pariwise probability information
+	double *probA;		// pariwise probability information
 	double *probB;
-
-	double *obj;
 
 	// for classification only
 
@@ -1711,48 +1712,6 @@ struct svm_model
 	int free_sv;		// 1 if svm_model is created by svm_load_model
 				// 0 if svm_model is created by svm_train
 };
-
-// Get the rho element of the model. Only works when there are two
-// labels (1 classifier).
-double svm_get_model_rho(struct svm_model *model)
-{
-  if (model->nr_class > 2)
-    info("warning: rho requested for model with more than 2 labels");
-  return model->rho[0];
-}
-
-int svm_get_model_num_coefs(struct svm_model *model)
-{
-  return model->l;
-}
-
-// Get the coefficients of the model. Only works when there are two
-// labels (1 classifier).
-void svm_get_model_coefs(struct svm_model *model, double* out_array)
-{
-  if (model->nr_class > 2)
-    info("warning: coefficients requested for model with more than 2 labels");
-  memcpy(out_array, model->sv_coef[0], sizeof(double) * model->l);
-}
-
-// Get the permutation of the indices of the coefficients w.r.t. to the input problem.
-void svm_get_model_perm(struct svm_model *model, int* out_array)
-{
-  if (model->nr_class > 2)
-    info("warning: permutation requested for model with more than 2 labels");
-  int i;
-  for ( i = 0; i < model->l; ++i)
-  {
-    struct svm_node* n = model->SV[i];
-    if (0 != n->index)
-    {
-      info("warning: missing 0 index");
-      out_array[i] = -1;
-    }
-    else
-      out_array[i] = (int)n->value;
-  }
-}
 
 // Platt's binary SVM Probablistic Output: an improvement from Lin et al.
 void sigmoid_train(
@@ -1766,7 +1725,7 @@ void sigmoid_train(
 		if (labels[i] > 0) prior1+=1;
 		else prior0+=1;
 	
-	int max_iter=100; 	// Maximal number of iterations
+	int max_iter=100;	// Maximal number of iterations
 	double min_step=1e-10;	// Minimal step taken in line search
 	double sigma=1e-12;	// For numerically strict PD of Hessian
 	double eps=1e-5;
@@ -1830,7 +1789,7 @@ void sigmoid_train(
 		gd=g1*dA+g2*dB;
 
 
-		stepsize = 1; 		// Line Search
+		stepsize = 1;		// Line Search
 		while (stepsize >= min_step)
 		{
 			newA = A + stepsize * dA;
@@ -2050,10 +2009,10 @@ double svm_svr_probability(
 	int count=0;
 	mae=0;
 	for(i=0;i<prob->l;i++)
-	        if (fabs(ymv[i]) > 5*std) 
-                        count=count+1;
+		if (fabs(ymv[i]) > 5*std) 
+			count=count+1;
 		else 
-		        mae+=fabs(ymv[i]);
+			mae+=fabs(ymv[i]);
 	mae /= (prob->l-count);
 	info("Prob. model for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma= %g\n",mae);
 	free(ymv);
@@ -2151,8 +2110,6 @@ svm_model *svm_train(const svm_problem *prob, const svm_parameter *param)
 		decision_function f = svm_train_one(prob,param,0,0);
 		model->rho = Malloc(double,1);
 		model->rho[0] = f.rho;
-		model->obj = Malloc(double,1);
-		model->obj[0] = f.obj;
 
 		int nSV = 0;
 		int i;
@@ -2266,13 +2223,8 @@ svm_model *svm_train(const svm_problem *prob, const svm_parameter *param)
 			model->label[i] = label[i];
 		
 		model->rho = Malloc(double,nr_class*(nr_class-1)/2);
-		model->obj = Malloc(double,nr_class*(nr_class-1)/2);
 		for(i=0;i<nr_class*(nr_class-1)/2;i++)
-		  {
 			model->rho[i] = f[i].rho;
-		    model->obj[i] = f[i].obj;
-		  }
-
 
 		if(param->probability)
 		{
@@ -2482,10 +2434,6 @@ void svm_cross_validation(const svm_problem *prob, const svm_parameter *param, i
 	free(perm);	
 }
 
-double svm_get_obj(const svm_model *model, const int i)
-{
-	return model->obj[i];
-}
 
 int svm_get_svm_type(const svm_model *model)
 {
@@ -2511,7 +2459,7 @@ double svm_get_svr_probability(const svm_model *model)
 		return model->probA[0];
 	else
 	{
-		info("Model doesn't contain information for SVR probability inference\n");
+		fprintf(stderr,"Model doesn't contain information for SVR probability inference\n");
 		return 0;
 	}
 }
@@ -2647,7 +2595,7 @@ double svm_predict_probability(
 		for(i=0;i<nr_class;i++)
 			free(pairwise_prob[i]);
 		free(dec_values);
-                free(pairwise_prob);	     
+		free(pairwise_prob);	     
 		return model->label[prob_max_idx];
 	}
 	else 
@@ -2751,6 +2699,27 @@ int svm_save_model(const char *model_file_name, const svm_model *model)
 	else return 0;
 }
 
+static char *line = NULL;
+static int max_line_len;
+
+static char* readline(FILE *input)
+{
+	int len;
+
+	if(fgets(line,max_line_len,input) == NULL)
+		return NULL;
+
+	while(strrchr(line,'\n') == NULL)
+	{
+		max_line_len *= 2;
+		line = (char *) realloc(line,max_line_len);
+		len = (int) strlen(line);
+		if(fgets(line+len,max_line_len-len,input) == NULL)
+			break;
+	}
+	return line;
+}
+
 svm_model *svm_load_model(const char *model_file_name)
 {
 	FILE *fp = fopen(model_file_name,"rb");
@@ -2765,8 +2734,6 @@ svm_model *svm_load_model(const char *model_file_name)
 	model->probB = NULL;
 	model->label = NULL;
 	model->nSV = NULL;
-
-	model->obj = NULL;
 
 	char cmd[81];
 	while(1)
@@ -2789,7 +2756,6 @@ svm_model *svm_load_model(const char *model_file_name)
 			{
 				fprintf(stderr,"unknown svm type.\n");
 				free(model->rho);
-				free(model->obj);
 				free(model->label);
 				free(model->nSV);
 				free(model);
@@ -2812,7 +2778,6 @@ svm_model *svm_load_model(const char *model_file_name)
 			{
 				fprintf(stderr,"unknown kernel function.\n");
 				free(model->rho);
-				free(model->obj);
 				free(model->label);
 				free(model->nSV);
 				free(model);
@@ -2877,7 +2842,6 @@ svm_model *svm_load_model(const char *model_file_name)
 		{
 			fprintf(stderr,"unknown text in model file: [%s]\n",cmd);
 			free(model->rho);
-			free(model->obj);
 			free(model->label);
 			free(model->nSV);
 			free(model);
@@ -2890,23 +2854,23 @@ svm_model *svm_load_model(const char *model_file_name)
 	int elements = 0;
 	long pos = ftell(fp);
 
-	while(1)
+	max_line_len = 1024;
+	line = Malloc(char,max_line_len);
+	char *p,*endptr,*idx,*val;
+
+	while(readline(fp)!=NULL)
 	{
-		int c = fgetc(fp);
-		switch(c)
+		p = strtok(line,":");
+		while(1)
 		{
-			case '\n':
-				// count the '-1' element
-			case ':':
-				++elements;
+			p = strtok(NULL,":");
+			if(p == NULL)
 				break;
-			case EOF:
-				goto out;
-			default:
-				;
+			++elements;
 		}
 	}
-out:
+	elements += model->l;
+
 	fseek(fp,pos,SEEK_SET);
 
 	int m = model->nr_class - 1;
@@ -2916,30 +2880,41 @@ out:
 	for(i=0;i<m;i++)
 		model->sv_coef[i] = Malloc(double,l);
 	model->SV = Malloc(svm_node*,l);
-	svm_node *x_space=NULL;
+	svm_node *x_space = NULL;
 	if(l>0) x_space = Malloc(svm_node,elements);
 
 	int j=0;
 	for(i=0;i<l;i++)
 	{
+		readline(fp);
 		model->SV[i] = &x_space[j];
-		for(int k=0;k<m;k++)
-			fscanf(fp,"%lf",&model->sv_coef[k][i]);
+
+		p = strtok(line, " \t");
+		model->sv_coef[0][i] = strtod(p,&endptr);
+		for(int k=1;k<m;k++)
+		{
+			p = strtok(NULL, " \t");
+			model->sv_coef[k][i] = strtod(p,&endptr);
+		}
+
 		while(1)
 		{
-			int c;
-			do {
-				c = getc(fp);
-				if(c=='\n') goto out2;
-			} while(isspace(c));
-			ungetc(c,fp);
-			fscanf(fp,"%d:%lf",&(x_space[j].index),&(x_space[j].value));
+			idx = strtok(NULL, ":");
+			val = strtok(NULL, " \t");
+
+			if(val == NULL)
+				break;
+			x_space[j].index = (int) strtol(idx,&endptr,10);
+			x_space[j].value = strtod(val,&endptr);
+
 			++j;
-		}	
-out2:
+		}
 		x_space[j++].index = -1;
 	}
-	if (ferror(fp) != 0 || fclose(fp) != 0) return NULL;
+	free(line);
+
+	if (ferror(fp) != 0 || fclose(fp) != 0)
+		return NULL;
 
 	model->free_sv = 1;	// XXX
 	return model;
@@ -2954,7 +2929,6 @@ void svm_destroy_model(svm_model* model)
 	free(model->SV);
 	free(model->sv_coef);
 	free(model->rho);
-	free(model->obj);
 	free(model->label);
 	free(model->probA);
 	free(model->probB);

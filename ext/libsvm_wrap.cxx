@@ -3297,38 +3297,6 @@ fail:
 
 
 SWIGINTERN VALUE
-_wrap_svm_get_obj(int argc, VALUE *argv, VALUE self) {
-  svm_model *arg1 = (svm_model *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double result;
-  VALUE vresult = Qnil;
-  
-  if ((argc < 2) || (argc > 2)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_svm_model, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "svm_model const *","svm_get_obj", 1, argv[0] )); 
-  }
-  arg1 = reinterpret_cast< svm_model * >(argp1);
-  ecode2 = SWIG_AsVal_int(argv[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), Ruby_Format_TypeError( "", "int","svm_get_obj", 2, argv[1] ));
-  } 
-  arg2 = static_cast< int >(val2);
-  result = (double)svm_get_obj((svm_model const *)arg1,arg2);
-  vresult = SWIG_From_double(static_cast< double >(result));
-  return vresult;
-fail:
-  return Qnil;
-}
-
-
-SWIGINTERN VALUE
 _wrap_svm_get_svm_type(int argc, VALUE *argv, VALUE self) {
   svm_model *arg1 = (svm_model *) 0 ;
   void *argp1 = 0 ;
@@ -3610,112 +3578,6 @@ _wrap_svm_check_probability_model(int argc, VALUE *argv, VALUE self) {
   result = (int)svm_check_probability_model((svm_model const *)arg1);
   vresult = SWIG_From_int(static_cast< int >(result));
   return vresult;
-fail:
-  return Qnil;
-}
-
-
-SWIGINTERN VALUE
-_wrap_svm_get_model_rho(int argc, VALUE *argv, VALUE self) {
-  svm_model *arg1 = (svm_model *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double result;
-  VALUE vresult = Qnil;
-  
-  if ((argc < 1) || (argc > 1)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_svm_model, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "svm_model *","svm_get_model_rho", 1, argv[0] )); 
-  }
-  arg1 = reinterpret_cast< svm_model * >(argp1);
-  result = (double)svm_get_model_rho(arg1);
-  vresult = SWIG_From_double(static_cast< double >(result));
-  return vresult;
-fail:
-  return Qnil;
-}
-
-
-SWIGINTERN VALUE
-_wrap_svm_get_model_num_coefs(int argc, VALUE *argv, VALUE self) {
-  svm_model *arg1 = (svm_model *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int result;
-  VALUE vresult = Qnil;
-  
-  if ((argc < 1) || (argc > 1)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_svm_model, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "svm_model *","svm_get_model_num_coefs", 1, argv[0] )); 
-  }
-  arg1 = reinterpret_cast< svm_model * >(argp1);
-  result = (int)svm_get_model_num_coefs(arg1);
-  vresult = SWIG_From_int(static_cast< int >(result));
-  return vresult;
-fail:
-  return Qnil;
-}
-
-
-SWIGINTERN VALUE
-_wrap_svm_get_model_coefs(int argc, VALUE *argv, VALUE self) {
-  svm_model *arg1 = (svm_model *) 0 ;
-  double *arg2 = (double *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  
-  if ((argc < 2) || (argc > 2)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_svm_model, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "svm_model *","svm_get_model_coefs", 1, argv[0] )); 
-  }
-  arg1 = reinterpret_cast< svm_model * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), Ruby_Format_TypeError( "", "double *","svm_get_model_coefs", 2, argv[1] )); 
-  }
-  arg2 = reinterpret_cast< double * >(argp2);
-  svm_get_model_coefs(arg1,arg2);
-  return Qnil;
-fail:
-  return Qnil;
-}
-
-
-SWIGINTERN VALUE
-_wrap_svm_get_model_perm(int argc, VALUE *argv, VALUE self) {
-  svm_model *arg1 = (svm_model *) 0 ;
-  int *arg2 = (int *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  
-  if ((argc < 2) || (argc > 2)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_svm_model, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "svm_model *","svm_get_model_perm", 1, argv[0] )); 
-  }
-  arg1 = reinterpret_cast< svm_model * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2,SWIGTYPE_p_int, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), Ruby_Format_TypeError( "", "int *","svm_get_model_perm", 2, argv[1] )); 
-  }
-  arg2 = reinterpret_cast< int * >(argp2);
-  svm_get_model_perm(arg1,arg2);
-  return Qnil;
 fail:
   return Qnil;
 }
@@ -4513,7 +4375,6 @@ SWIGEXPORT void Init_libsvm(void) {
   rb_define_module_function(mLibsvm, "svm_cross_validation", VALUEFUNC(_wrap_svm_cross_validation), -1);
   rb_define_module_function(mLibsvm, "svm_save_model", VALUEFUNC(_wrap_svm_save_model), -1);
   rb_define_module_function(mLibsvm, "svm_load_model", VALUEFUNC(_wrap_svm_load_model), -1);
-  rb_define_module_function(mLibsvm, "svm_get_obj", VALUEFUNC(_wrap_svm_get_obj), -1);
   rb_define_module_function(mLibsvm, "svm_get_svm_type", VALUEFUNC(_wrap_svm_get_svm_type), -1);
   rb_define_module_function(mLibsvm, "svm_get_nr_class", VALUEFUNC(_wrap_svm_get_nr_class), -1);
   rb_define_module_function(mLibsvm, "svm_get_labels", VALUEFUNC(_wrap_svm_get_labels), -1);
@@ -4524,10 +4385,6 @@ SWIGEXPORT void Init_libsvm(void) {
   rb_define_module_function(mLibsvm, "svm_destroy_model", VALUEFUNC(_wrap_svm_destroy_model), -1);
   rb_define_module_function(mLibsvm, "svm_check_parameter", VALUEFUNC(_wrap_svm_check_parameter), -1);
   rb_define_module_function(mLibsvm, "svm_check_probability_model", VALUEFUNC(_wrap_svm_check_probability_model), -1);
-  rb_define_module_function(mLibsvm, "svm_get_model_rho", VALUEFUNC(_wrap_svm_get_model_rho), -1);
-  rb_define_module_function(mLibsvm, "svm_get_model_num_coefs", VALUEFUNC(_wrap_svm_get_model_num_coefs), -1);
-  rb_define_module_function(mLibsvm, "svm_get_model_coefs", VALUEFUNC(_wrap_svm_get_model_coefs), -1);
-  rb_define_module_function(mLibsvm, "svm_get_model_perm", VALUEFUNC(_wrap_svm_get_model_perm), -1);
   rb_define_module_function(mLibsvm, "new_int", VALUEFUNC(_wrap_new_int), -1);
   rb_define_module_function(mLibsvm, "delete_int", VALUEFUNC(_wrap_delete_int), -1);
   rb_define_module_function(mLibsvm, "int_getitem", VALUEFUNC(_wrap_int_getitem), -1);
