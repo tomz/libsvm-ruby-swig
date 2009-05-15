@@ -1816,10 +1816,10 @@ static swig_module_info swig_module = {swig_types, 8, 0, 0, 0, 0};
 
 /* -------- TYPES TABLE (END) -------- */
 
-#define SWIG_init    Init_svmc
-#define SWIG_name    "Svmc"
+#define SWIG_init    Init_libsvm
+#define SWIG_name    "Libsvm"
 
-static VALUE mSvmc;
+static VALUE mLibsvm;
 
 #define SWIG_RUBY_THREAD_BEGIN_BLOCK
 #define SWIG_RUBY_THREAD_END_BLOCK
@@ -4439,7 +4439,7 @@ SWIGEXPORT void Init_libsvm(void) {
   size_t i;
   
   SWIG_InitRuntime();
-  mSvmc = rb_define_module("LibSVM");
+  mLibsvm = rb_define_module("Libsvm");
   
   SWIG_InitializeModule(0);
   for (i = 0; i < swig_module.size; i++) {
@@ -4447,18 +4447,18 @@ SWIGEXPORT void Init_libsvm(void) {
   }
   
   SWIG_RubyInitializeTrackings();
-  rb_define_const(mSvmc, "C_SVC", SWIG_From_int(static_cast< int >(C_SVC)));
-  rb_define_const(mSvmc, "NU_SVC", SWIG_From_int(static_cast< int >(NU_SVC)));
-  rb_define_const(mSvmc, "ONE_CLASS", SWIG_From_int(static_cast< int >(ONE_CLASS)));
-  rb_define_const(mSvmc, "EPSILON_SVR", SWIG_From_int(static_cast< int >(EPSILON_SVR)));
-  rb_define_const(mSvmc, "NU_SVR", SWIG_From_int(static_cast< int >(NU_SVR)));
-  rb_define_const(mSvmc, "LINEAR", SWIG_From_int(static_cast< int >(LINEAR)));
-  rb_define_const(mSvmc, "POLY", SWIG_From_int(static_cast< int >(POLY)));
-  rb_define_const(mSvmc, "RBF", SWIG_From_int(static_cast< int >(RBF)));
-  rb_define_const(mSvmc, "SIGMOID", SWIG_From_int(static_cast< int >(SIGMOID)));
-  rb_define_const(mSvmc, "PRECOMPUTED", SWIG_From_int(static_cast< int >(PRECOMPUTED)));
+  rb_define_const(mLibsvm, "C_SVC", SWIG_From_int(static_cast< int >(C_SVC)));
+  rb_define_const(mLibsvm, "NU_SVC", SWIG_From_int(static_cast< int >(NU_SVC)));
+  rb_define_const(mLibsvm, "ONE_CLASS", SWIG_From_int(static_cast< int >(ONE_CLASS)));
+  rb_define_const(mLibsvm, "EPSILON_SVR", SWIG_From_int(static_cast< int >(EPSILON_SVR)));
+  rb_define_const(mLibsvm, "NU_SVR", SWIG_From_int(static_cast< int >(NU_SVR)));
+  rb_define_const(mLibsvm, "LINEAR", SWIG_From_int(static_cast< int >(LINEAR)));
+  rb_define_const(mLibsvm, "POLY", SWIG_From_int(static_cast< int >(POLY)));
+  rb_define_const(mLibsvm, "RBF", SWIG_From_int(static_cast< int >(RBF)));
+  rb_define_const(mLibsvm, "SIGMOID", SWIG_From_int(static_cast< int >(SIGMOID)));
+  rb_define_const(mLibsvm, "PRECOMPUTED", SWIG_From_int(static_cast< int >(PRECOMPUTED)));
   
-  cSvm_parameter.klass = rb_define_class_under(mSvmc, "Svm_parameter", rb_cObject);
+  cSvm_parameter.klass = rb_define_class_under(mLibsvm, "Svm_parameter", rb_cObject);
   SWIG_TypeClientData(SWIGTYPE_p_svm_parameter, (void *) &cSvm_parameter);
   rb_define_alloc_func(cSvm_parameter.klass, _wrap_svm_parameter_allocate);
   rb_define_method(cSvm_parameter.klass, "initialize", VALUEFUNC(_wrap_new_svm_parameter), -1);
@@ -4496,7 +4496,7 @@ SWIGEXPORT void Init_libsvm(void) {
   cSvm_parameter.destroy = (void (*)(void *)) free_svm_parameter;
   cSvm_parameter.trackObjects = 0;
   
-  cSvm_problem.klass = rb_define_class_under(mSvmc, "Svm_problem", rb_cObject);
+  cSvm_problem.klass = rb_define_class_under(mLibsvm, "Svm_problem", rb_cObject);
   SWIG_TypeClientData(SWIGTYPE_p_svm_problem, (void *) &cSvm_problem);
   rb_define_alloc_func(cSvm_problem.klass, _wrap_svm_problem_allocate);
   rb_define_method(cSvm_problem.klass, "initialize", VALUEFUNC(_wrap_new_svm_problem), -1);
@@ -4509,40 +4509,40 @@ SWIGEXPORT void Init_libsvm(void) {
   cSvm_problem.mark = 0;
   cSvm_problem.destroy = (void (*)(void *)) free_svm_problem;
   cSvm_problem.trackObjects = 0;
-  rb_define_module_function(mSvmc, "svm_train", VALUEFUNC(_wrap_svm_train), -1);
-  rb_define_module_function(mSvmc, "svm_cross_validation", VALUEFUNC(_wrap_svm_cross_validation), -1);
-  rb_define_module_function(mSvmc, "svm_save_model", VALUEFUNC(_wrap_svm_save_model), -1);
-  rb_define_module_function(mSvmc, "svm_load_model", VALUEFUNC(_wrap_svm_load_model), -1);
-  rb_define_module_function(mSvmc, "svm_get_obj", VALUEFUNC(_wrap_svm_get_obj), -1);
-  rb_define_module_function(mSvmc, "svm_get_svm_type", VALUEFUNC(_wrap_svm_get_svm_type), -1);
-  rb_define_module_function(mSvmc, "svm_get_nr_class", VALUEFUNC(_wrap_svm_get_nr_class), -1);
-  rb_define_module_function(mSvmc, "svm_get_labels", VALUEFUNC(_wrap_svm_get_labels), -1);
-  rb_define_module_function(mSvmc, "svm_get_svr_probability", VALUEFUNC(_wrap_svm_get_svr_probability), -1);
-  rb_define_module_function(mSvmc, "svm_predict_values", VALUEFUNC(_wrap_svm_predict_values), -1);
-  rb_define_module_function(mSvmc, "svm_predict", VALUEFUNC(_wrap_svm_predict), -1);
-  rb_define_module_function(mSvmc, "svm_predict_probability", VALUEFUNC(_wrap_svm_predict_probability), -1);
-  rb_define_module_function(mSvmc, "svm_destroy_model", VALUEFUNC(_wrap_svm_destroy_model), -1);
-  rb_define_module_function(mSvmc, "svm_check_parameter", VALUEFUNC(_wrap_svm_check_parameter), -1);
-  rb_define_module_function(mSvmc, "svm_check_probability_model", VALUEFUNC(_wrap_svm_check_probability_model), -1);
-  rb_define_module_function(mSvmc, "svm_get_model_rho", VALUEFUNC(_wrap_svm_get_model_rho), -1);
-  rb_define_module_function(mSvmc, "svm_get_model_num_coefs", VALUEFUNC(_wrap_svm_get_model_num_coefs), -1);
-  rb_define_module_function(mSvmc, "svm_get_model_coefs", VALUEFUNC(_wrap_svm_get_model_coefs), -1);
-  rb_define_module_function(mSvmc, "svm_get_model_perm", VALUEFUNC(_wrap_svm_get_model_perm), -1);
-  rb_define_module_function(mSvmc, "new_int", VALUEFUNC(_wrap_new_int), -1);
-  rb_define_module_function(mSvmc, "delete_int", VALUEFUNC(_wrap_delete_int), -1);
-  rb_define_module_function(mSvmc, "int_getitem", VALUEFUNC(_wrap_int_getitem), -1);
-  rb_define_module_function(mSvmc, "int_setitem", VALUEFUNC(_wrap_int_setitem), -1);
-  rb_define_module_function(mSvmc, "new_double", VALUEFUNC(_wrap_new_double), -1);
-  rb_define_module_function(mSvmc, "delete_double", VALUEFUNC(_wrap_delete_double), -1);
-  rb_define_module_function(mSvmc, "double_getitem", VALUEFUNC(_wrap_double_getitem), -1);
-  rb_define_module_function(mSvmc, "double_setitem", VALUEFUNC(_wrap_double_setitem), -1);
-  rb_define_singleton_method(mSvmc, "info_on", VALUEFUNC(_wrap_info_on_get), 0);
-  rb_define_singleton_method(mSvmc, "info_on=", VALUEFUNC(_wrap_info_on_set), 1);
-  rb_define_module_function(mSvmc, "svm_node_array", VALUEFUNC(_wrap_svm_node_array), -1);
-  rb_define_module_function(mSvmc, "svm_node_array_set", VALUEFUNC(_wrap_svm_node_array_set), -1);
-  rb_define_module_function(mSvmc, "svm_node_array_destroy", VALUEFUNC(_wrap_svm_node_array_destroy), -1);
-  rb_define_module_function(mSvmc, "svm_node_matrix", VALUEFUNC(_wrap_svm_node_matrix), -1);
-  rb_define_module_function(mSvmc, "svm_node_matrix_set", VALUEFUNC(_wrap_svm_node_matrix_set), -1);
-  rb_define_module_function(mSvmc, "svm_node_matrix_destroy", VALUEFUNC(_wrap_svm_node_matrix_destroy), -1);
+  rb_define_module_function(mLibsvm, "svm_train", VALUEFUNC(_wrap_svm_train), -1);
+  rb_define_module_function(mLibsvm, "svm_cross_validation", VALUEFUNC(_wrap_svm_cross_validation), -1);
+  rb_define_module_function(mLibsvm, "svm_save_model", VALUEFUNC(_wrap_svm_save_model), -1);
+  rb_define_module_function(mLibsvm, "svm_load_model", VALUEFUNC(_wrap_svm_load_model), -1);
+  rb_define_module_function(mLibsvm, "svm_get_obj", VALUEFUNC(_wrap_svm_get_obj), -1);
+  rb_define_module_function(mLibsvm, "svm_get_svm_type", VALUEFUNC(_wrap_svm_get_svm_type), -1);
+  rb_define_module_function(mLibsvm, "svm_get_nr_class", VALUEFUNC(_wrap_svm_get_nr_class), -1);
+  rb_define_module_function(mLibsvm, "svm_get_labels", VALUEFUNC(_wrap_svm_get_labels), -1);
+  rb_define_module_function(mLibsvm, "svm_get_svr_probability", VALUEFUNC(_wrap_svm_get_svr_probability), -1);
+  rb_define_module_function(mLibsvm, "svm_predict_values", VALUEFUNC(_wrap_svm_predict_values), -1);
+  rb_define_module_function(mLibsvm, "svm_predict", VALUEFUNC(_wrap_svm_predict), -1);
+  rb_define_module_function(mLibsvm, "svm_predict_probability", VALUEFUNC(_wrap_svm_predict_probability), -1);
+  rb_define_module_function(mLibsvm, "svm_destroy_model", VALUEFUNC(_wrap_svm_destroy_model), -1);
+  rb_define_module_function(mLibsvm, "svm_check_parameter", VALUEFUNC(_wrap_svm_check_parameter), -1);
+  rb_define_module_function(mLibsvm, "svm_check_probability_model", VALUEFUNC(_wrap_svm_check_probability_model), -1);
+  rb_define_module_function(mLibsvm, "svm_get_model_rho", VALUEFUNC(_wrap_svm_get_model_rho), -1);
+  rb_define_module_function(mLibsvm, "svm_get_model_num_coefs", VALUEFUNC(_wrap_svm_get_model_num_coefs), -1);
+  rb_define_module_function(mLibsvm, "svm_get_model_coefs", VALUEFUNC(_wrap_svm_get_model_coefs), -1);
+  rb_define_module_function(mLibsvm, "svm_get_model_perm", VALUEFUNC(_wrap_svm_get_model_perm), -1);
+  rb_define_module_function(mLibsvm, "new_int", VALUEFUNC(_wrap_new_int), -1);
+  rb_define_module_function(mLibsvm, "delete_int", VALUEFUNC(_wrap_delete_int), -1);
+  rb_define_module_function(mLibsvm, "int_getitem", VALUEFUNC(_wrap_int_getitem), -1);
+  rb_define_module_function(mLibsvm, "int_setitem", VALUEFUNC(_wrap_int_setitem), -1);
+  rb_define_module_function(mLibsvm, "new_double", VALUEFUNC(_wrap_new_double), -1);
+  rb_define_module_function(mLibsvm, "delete_double", VALUEFUNC(_wrap_delete_double), -1);
+  rb_define_module_function(mLibsvm, "double_getitem", VALUEFUNC(_wrap_double_getitem), -1);
+  rb_define_module_function(mLibsvm, "double_setitem", VALUEFUNC(_wrap_double_setitem), -1);
+  rb_define_singleton_method(mLibsvm, "info_on", VALUEFUNC(_wrap_info_on_get), 0);
+  rb_define_singleton_method(mLibsvm, "info_on=", VALUEFUNC(_wrap_info_on_set), 1);
+  rb_define_module_function(mLibsvm, "svm_node_array", VALUEFUNC(_wrap_svm_node_array), -1);
+  rb_define_module_function(mLibsvm, "svm_node_array_set", VALUEFUNC(_wrap_svm_node_array_set), -1);
+  rb_define_module_function(mLibsvm, "svm_node_array_destroy", VALUEFUNC(_wrap_svm_node_array_destroy), -1);
+  rb_define_module_function(mLibsvm, "svm_node_matrix", VALUEFUNC(_wrap_svm_node_matrix), -1);
+  rb_define_module_function(mLibsvm, "svm_node_matrix_set", VALUEFUNC(_wrap_svm_node_matrix_set), -1);
+  rb_define_module_function(mLibsvm, "svm_node_matrix_destroy", VALUEFUNC(_wrap_svm_node_matrix_destroy), -1);
 }
 

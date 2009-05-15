@@ -1,4 +1,4 @@
-%module svmc
+%module libsvm
 %{
 #include "svm.h"
 %}

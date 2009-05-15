@@ -1,5 +1,5 @@
-require 'libsvm-ruby-swig/libsvm'
-include LibSVM
+require 'libsvm'
+include Libsvm
 
 def _int_array(seq)
   size = seq.size

@@ -18,7 +18,7 @@ end
 
 task :make_gem => EXT
 
-file EXT => ["ext/extconf.rb", "ext/svmc_wrap.cxx", "ext/svm.cpp", "ext/svm.h"] do
+file EXT => ["ext/extconf.rb", "ext/libsvm_wrap.cxx", "ext/svm.cpp", "ext/svm.h"] do
   Dir.chdir "ext" do
     ruby "extconf.rb"
     sh "make"
@@ -28,7 +28,7 @@ end
 task :sync_files do
   cp "libsvm-2.88/svm.h","ext/"
   cp "libsvm-2.88/svm.cpp","ext/"
-  cp "libsvm-2.88/ruby/svmc_wrap.cxx","ext/"
+  cp "libsvm-2.88/ruby/libsvm_wrap.cxx","ext/"
   cp "libsvm-2.88/ruby/svm.rb","lib/"
 end
 

@@ -9,16 +9,16 @@ LDFLAGS = -shared
 # Mac OS
 # LDFLAGS = -framework Ruby -bundle
 
-all: svmc.so
+all: libsvm.so
 
-svmc.so: svmc_wrap.o svm.o
-	$(CXX) $(LDFLAGS) -o svmc.so svmc_wrap.o svm.o
+libsvm.so: libsvm_wrap.o svm.o
+	$(CXX) $(LDFLAGS) -o libsvm.so libsvm_wrap.o svm.o
 
-svmc_wrap.o: svmc_wrap.c ../svm.h
-	$(CXX) $(CFLAGS) -fPIC -c svmc_wrap.cxx
+libsvm_wrap.o: libsvm_wrap.c ../svm.h
+	$(CXX) $(CFLAGS) -fPIC -c libsvm_wrap.cxx
 
-svmc_wrap.c: svmc.i
-	$(SWIG) -ruby -c++ svmc.i
+libsvm_wrap.c: libsvm.i
+	$(SWIG) -ruby -c++ libsvm.i
 
 svm.o: ../svm.cpp ../svm.h
 	$(CXX) $(CFLAGS) -fPIC -c ../svm.cpp
@@ -27,4 +27,4 @@ clean:
 	rm -f *~ *.o *.so svm.o
 
 moreclean:	clean
-	rm -f svmc_wrap.c??
+	rm -f libsvm_wrap.c??
