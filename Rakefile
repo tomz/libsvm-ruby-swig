@@ -1,4 +1,5 @@
 require 'rubygems'
+gem 'hoe', '>=1.8.3','<= 1.12.2'
 require 'hoe'
 
 task :default => ["sync_files","make_gem"] 
