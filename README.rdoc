@@ -2,6 +2,7 @@
 
 * Ruby interface to LIBSVM (using SWIG)
 * http://www.tomzconsulting.com
+* http://tweetsentiments.com
 
 == DESCRIPTION:
 
@@ -16,6 +17,9 @@ Look for the README file in the ruby subdirectory for instructions.
 The binaries included were built under Ubuntu Linux 2.6.24-23-generic,
 you should run make under the libsvm-2.89 and libsvm-2.89/ruby 
 directories to regenerate the executables for your environment.
+
+LIBSVM is in use at http://tweetsentiments.com - A Twitter / Tweet sentiment
+analysis application
 
 == INSTALL:
 Currently the gem is available on linux only(tested on Ubuntu 8 and Fedora 9/10,
@@ -49,6 +53,7 @@ Segaran's "Programming Collective Intelligence" book):
 == AUTHOR:
 
 Tom Zeng
+- http://twitter.com/tomzeng
 - http://www.tomzconsulting.com
 - http://www.linkedin.com/in/tomzeng
 - tom.z.zeng _at_ gmail _dot_ com
