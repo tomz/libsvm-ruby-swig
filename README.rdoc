@@ -9,20 +9,20 @@
 This is the Ruby port of the LIBSVM Python SWIG (Simplified Wrapper and 
 Interface Generator) interface.
 
-A slightly modified version of LIBSVM 2.89 is included, it allows turrning on/off
+A slightly modified version of LIBSVM 2.9 is included, it allows turrning on/off
 the debug log. You don't need your own copy of SWIG to use this library - all 
 needed files are generated using SWIG already.
 
 Look for the README file in the ruby subdirectory for instructions.
-The binaries included were built under Ubuntu Linux 2.6.24-23-generic,
-you should run make under the libsvm-2.89 and libsvm-2.89/ruby 
+The binaries included were built under Ubuntu Linux 2.6.28-18-generic x86_64,
+you should run make under the libsvm-2.9 and libsvm-2.9/ruby 
 directories to regenerate the executables for your environment.
 
 LIBSVM is in use at http://tweetsentiments.com - A Twitter / Tweet sentiment
 analysis application
 
 == INSTALL:
-Currently the gem is available on linux only(tested on Ubuntu 8 and Fedora 9/10,
+Currently the gem is available on linux only(tested on Ubuntu 8-9 and Fedora 9-12,
 and on OS X by danielsdeleo), and you will need g++ installed to compile the 
 native code. 
 
