@@ -6,6 +6,12 @@
 enum { C_SVC, NU_SVC, ONE_CLASS, EPSILON_SVR, NU_SVR };	/* svm_type */
 enum { LINEAR, POLY, RBF, SIGMOID, PRECOMPUTED };	/* kernel_type */
 
+struct svm_node
+{
+        int index;
+        double value;
+};
+
 struct svm_parameter
 {
 	int svm_type;
