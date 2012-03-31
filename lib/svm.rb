@@ -209,7 +209,7 @@ class Model
     @labels = _int_array_to_list(intarr, @nr_class)
     delete_int(intarr)
     #check if valid probability model
-    @probability = svm_check_probability_model(@model)
+    @probability = (svm_check_probability_model(@model) == 1)
 
   end
   
